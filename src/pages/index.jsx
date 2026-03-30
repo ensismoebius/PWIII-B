@@ -12,6 +12,8 @@ function App() {
       <p>Mikail Alexandrovichy Bakunin</p>
       <p>
         <Link to="/about">Sobre</Link>
+        <br />
+        <Link to="/data">Dados</Link>
       </p>
     </>
   )
