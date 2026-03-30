@@ -1,18 +1,16 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Instale o 'vite-plugin-pages' para
-// gerar rotas automaticamente com base 
-// na estrutura de arquivos. Os arquivos
-// por padrão ficam no diretório 'src/pages'.
-// Mas você pode configurar o diretório de 
-// páginas com a opção 'pagesDir' do plugin.
-import Pages from 'vite-plugin-pages'
+// Importa o plugin de rotas do Vite,
+// para usá-lo é preciso instalar o pacote 
+// 'vite-plugin-pages' e adicioná-lo à lista 
+// de plugins (será feito no próximo passo).
+import Pages from 'vite-plugin-pages';
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    Pages(), // Configura o plugin de rotas automáticas
+    Pages(), // Ativa o plugin de rotas do Vite
     react({
       babel: {
         plugins: [['babel-plugin-react-compiler']],
