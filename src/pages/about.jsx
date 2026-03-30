@@ -20,7 +20,7 @@ function About() {
                 alt="Hot Guys"
                 style={{ maxWidth: '50%', height: 'auto' }}
             />
-            <p>Mikhail Alexadrovich Bakunin, Karl Marx, Malcon X, Thomás Sankara</p>
+            <p>Mikhail Alexandrovich Bakunin, Karl Marx, Malcon X, Thomás Sankara</p>
             <p>
                 <Link to="/">Voltar para Início</Link>
             </p>
