@@ -29,6 +29,7 @@ app.get('/api/users', async (req, res) => {
         const users = await query('SELECT id, name, email FROM users')
         res.json(users)
     } catch (err) {
+        console.error('Erro em /api/users:', err)
         res.status(500).json({ error: err.message })
     }
 })

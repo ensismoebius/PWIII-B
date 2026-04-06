@@ -210,13 +210,24 @@ Acesse `http://localhost:5173` e clique em **MySQL** para ver os usuários lista
 
 ## Como ver erros do servidor
 
-Os erros do backend aparecem no terminal onde você executou:
+No código atual, os erros do backend são devolvidos pela API como resposta HTTP 500 com JSON, e a página React mostra a mensagem de erro na tela.
+
+O terminal onde você executou o backend é:
 
 ```bash
 npm run server
 ```
 
-Se houver erro de conexão com o MySQL, credenciais incorretas no `.env` ou problema na query SQL, a resposta da rota `/api/users` será erro e a mensagem aparecerá nesse terminal.
+Se houver erro de conexão com o MySQL, credenciais incorretas no `.env` ou problema na query SQL, a rota `/api/users` responderá com erro e a página `/mysql` exibirá essa falha.
+
+Se você quiser também ver o erro detalhado no terminal, ajuste o `catch` em `server/index.js` assim:
+
+```js
+} catch (err) {
+  console.error('Erro em /api/users:', err)
+  res.status(500).json({ error: err.message })
+}
+```
 
 ## Problemas comuns
 
@@ -273,13 +284,18 @@ CREATE TABLE users (
 
 Isso significa que o frontend conseguiu falar com o backend, mas o backend falhou ao consultar o banco.
 
-Olhe o terminal do comando:
+As causas mais comuns são:
+
+- credenciais incorretas no `.env`
+- banco inexistente
+- tabela `users` inexistente
+- colunas diferentes de `id`, `name` e `email`
+
+Se quiser ver o stack completo no terminal, adicione `console.error` no `catch` da rota e então rode:
 
 ```bash
 npm run server
 ```
-
-Esse terminal mostra a causa real do erro.
 
 ### 6. A página não carrega dados e o backend parece correto
 
