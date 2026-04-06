@@ -7,8 +7,11 @@ function MysqlPage() {
 
     useEffect(() => {
         fetch('/api/users')
-            .then((res) => res.json())
-            .then((data) => setUsers(data))
+            .then((res) => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`)
+                return res.json()
+            })
+            .then((data) => setUsers(Array.isArray(data) ? data : []))
             .catch((err) => setError(err.message))
             .finally(() => setLoading(false))
     }, [])
