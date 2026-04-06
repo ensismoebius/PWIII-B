@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "_comment": "O comando 'server' é para rodar o servidor Express, que é necessário para a funcionalidade de MySQL. Ele deve ser executado em um terminal separado, enquanto o comando 'dev' roda o Vite para o frontend.",
+    "server": "node server/index.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -14,7 +16,10 @@
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.2",
     "vite-plugin-pages": "^0.33.3",
-    "mysql2": "^3.6.0"
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "mysql2": "^3.6.0",
+    "dotenv": "^16.4.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

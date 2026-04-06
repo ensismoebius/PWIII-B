@@ -9,6 +9,12 @@ import Pages from 'vite-plugin-pages';
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Redireciona /api/* para o servidor Express (porta 4000)
+  server: {
+    proxy: {
+      '/api': 'http://localhost:4000',
+    },
+  },
   plugins: [
     Pages(), // Ativa o plugin de rotas do Vite
     react({
