@@ -15,7 +15,7 @@ export default function Data() {
         // Cria um novo array de dados, adicionando o texto atual ao final da lista de dados existente.
         const novaListaDeDados = [
             ...listaDeDados,
-            evento.target.value
+            texto
         ]
 
         // Atualiza o estado da lista de dados com a nova lista, o que fará com que a página seja re-renderizada e exiba o novo item.
@@ -38,19 +38,30 @@ export default function Data() {
             <input
                 type="button"
                 value="Adicionar"
-                onClick={ }
+                onClick={addItem}
             />
 
             <p>Aqui estão os dados</p>
-            <ul>
-                {
-                    // Mapeia cada item da lista de dados para um elemento <li> que será exibido na página.
-                    listaDeDados.map((item, index) =>
-                    (
-                        <li key={index}>{item}</li>
-                    ))
-                }
-            </ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th>indice</th>
+                        <th>valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        // Mapeia cada item da lista de dados para um elemento <li> que será exibido na página.
+                        listaDeDados.map((item, index) =>
+                        (
+                            <tr key={index}>
+                                <td>{index}</td>
+                                <td>{item}</td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
         </div>
     )
 }
