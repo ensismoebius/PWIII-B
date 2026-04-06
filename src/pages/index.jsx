@@ -14,8 +14,6 @@ function App() {
         <Link to="/about">Sobre</Link>
         <br />
         <Link to="/data">Dados</Link>
-        <br />
-        <Link to="/mysql">MySQL</Link>
       </p>
     </>
   )
