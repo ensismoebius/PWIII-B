@@ -3,12 +3,12 @@ const STORAGE_KEY = 'pwiii-items';
 
 export function getItems() {
     try {
-        // localStorage é uma variável prédefinida que 
+        // localStorage é uma variável pré-definida que 
         // aponta para o armazenamento local do navegador
         // tal variavel contém um objeto cujo metódo
         //  "getItems" retorna o conteúdo armazenado
         // no banco de dados local.
-        const infoBruta = localStorage.getItems(STORAGE_KEY);
+        const infoBruta = localStorage.getItem(STORAGE_KEY);
         return infoBruta ? JSON.parse(infoBruta) : [];
     } catch (erro) {
         console.erro('Fail to retrieve the items', erro);
