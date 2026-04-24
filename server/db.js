@@ -17,3 +17,22 @@ export async function query(sql, params = []) {
     const [rows] = await pool.execute(sql, params)
     return rows
 }
+
+export async function getUsers() {
+    return query('SELECT id, name, email FROM users ORDER BY id DESC')
+}
+
+export async function createUser({ name, email }) {
+    const result = await query('INSERT INTO users (name, email) VALUES (?, ?)', [name, email])
+    return query('SELECT id, name, email FROM users WHERE id = ?', [result.insertId]).then((rows) => rows[0])
+}
+
+export async function updateUser(id, { name, email }) {
+    await query('UPDATE users SET name = ?, email = ? WHERE id = ?', [name, email, id])
+    return query('SELECT id, name, email FROM users WHERE id = ?', [id]).then((rows) => rows[0] || null)
+}
+
+export async function deleteUser(id) {
+    const result = await query('DELETE FROM users WHERE id = ?', [id])
+    return result.affectedRows > 0
+}

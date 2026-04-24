@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getItems, addItem, removeItem } from '../lib/db'
 import './App.css'
 
 function DataPage() {
-    const [items, setItems] = useState([])
-    const [text, setText] = useState('')
 
-    useEffect(() => {
-        setItems(getItems())
-    }, [])
+    // Melhor do que usar useEffect para carregar os dados do localStorage, 
+    // é usar o argumento de função do useState, que é executado apenas na 
+    // inicialização do componente. Assim, evitamos renderizações desnecessárias.  
+    const [items, setItems] = useState(() => getItems())
+    const [text, setText] = useState('')
 
     function handleAdd(e) {
         e.preventDefault()
