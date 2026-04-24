@@ -7,12 +7,12 @@
 import 'dotenv/config'
 
 // Importa  o express que é um framework web para Node.js, o cors para lidar com 
-// requisições de origens diferentes (CORS) e a função query do arquivo db.js 
-// para interagir com o banco de dados MySQL.
+// requisições de origens diferentes (CORS - Cross-Origin Resource Sharing) e a 
+// função query do arquivo db.js para interagir com o banco de dados MySQL.
 import express from 'express'
 
 // Sem cors, o navegador normalmente bloqueia a chamada por política de segurança 
-// chamada CORS: Cross-Origin Resource Sharing. Na prática, ele adiciona headers 
+// chamada CORS. Na prática, ele adiciona headers 
 // HTTP como: "Access-Control-Allow-Origin: *" para permitir que o frontend 
 // (que roda em outro domínio/porta) acesse os dados do backend sem ser bloqueado. 
 // O cors é um middleware que facilita a configuração dessas permissões.
