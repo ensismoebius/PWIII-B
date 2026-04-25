@@ -19,7 +19,7 @@ export default function Cep() {
     try {
       const resposta = await fetch(`https://viacep.com.br/ws/${valorDoCep}/json/`);
       const dadoEmJson = await resposta.json();
-      
+
       if (dadoEmJson.erro) {
         setErro('CEP não existe');
         setDados(null);
@@ -28,7 +28,7 @@ export default function Cep() {
         setErro('');
       }
     } catch (err) {
-      setErro('Erro ao buscar CEP');
+      setErro('Erro ao buscar CEP ' + err.message);
       setDados(null);
     } finally {
       setCarregando(false);
@@ -48,7 +48,7 @@ export default function Cep() {
       />
 
       {carregando && <p className="loading-message">Carregando...</p>}
-      
+
       {erro && <p className="error-message cb-status-error">{erro}</p>}
 
       {dados && (
