@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 function App() {
   return (
     <div className="exuberant-div">
-      <p className="exuberant-text">Mikail Alexandrovichy Bakunin</p>
+      <h1>Menu</h1>
       <p className="exuberant-links">
         <Link to="/about" className="exuberant-link">Sobre</Link>
         <br />
