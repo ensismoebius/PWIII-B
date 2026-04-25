@@ -3,12 +3,12 @@ export default function Alternador(
 ) {
     return (
         <div>
-            <input 
-            type="checkbox" 
-            checked={estadoBooleano}
-            onChange={
-                () => setEstadoBooleano(!estadoBooleano)
-            }
+            <input
+                type="checkbox"
+                checked={estadoBooleano}
+                onChange={
+                    () => setEstadoBooleano(!estadoBooleano)
+                }
             />
             <label>Alternador</label>
         </div>

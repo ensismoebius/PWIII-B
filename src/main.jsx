@@ -14,7 +14,7 @@ import routes from '~react-pages';
 const router = createBrowserRouter(routes);
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode> 
+  <StrictMode>
     {/* 
     O strict mode é uma ferramenta para destacar 
     problemas potenciais no aplicativo. Ele ativa 
