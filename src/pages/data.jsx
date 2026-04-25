@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getItems, addItem, removeItem } from '../lib/db'
-import './App.css'
 
 function DataPage() {
     const [items, setItems] = useState(() => getItems())

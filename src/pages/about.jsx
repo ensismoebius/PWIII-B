@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import hotguys from '../assets/Bakunin_&_Marx_&_malcon_&_sankara.png'
 import hotgirls from '../assets/RosaLuxemburgo_&_AngelaDavis_&_LouiseMichel_&_TeresaClaramunt.png'
-import './App.css'
 
 function About() {
     return (
