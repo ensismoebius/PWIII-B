@@ -4,10 +4,6 @@ import { getItems, addItem, removeItem } from '../lib/db'
 import './App.css'
 
 function DataPage() {
-
-    // Melhor do que usar useEffect para carregar os dados do localStorage, 
-    // é usar o argumento de função do useState, que é executado apenas na 
-    // inicialização do componente. Assim, evitamos renderizações desnecessárias.  
     const [items, setItems] = useState(() => getItems())
     const [text, setText] = useState('')
 
@@ -26,26 +22,40 @@ function DataPage() {
     }
 
     return (
-        <>
-            <h1>Dados (localStorage)</h1>
-            <form onSubmit={handleAdd} style={{ marginBottom: 12 }}>
-                <input value={text} onChange={e => setText(e.target.value)} placeholder="Novo item" />
-                <button type="submit">Adicionar</button>
+        <div className="exuberant-div">
+            <h1 className="exuberant-title">Dados (localStorage)</h1>
+            <form className="exuberant-form" onSubmit={handleAdd}>
+                <input 
+                    className="exuberant-input" 
+                    value={text} 
+                    onChange={e => setText(e.target.value)} 
+                    placeholder="Novo item" 
+                />
+                <button type="submit" className="exuberant-button">Adicionar</button>
             </form>
 
-            <ul>
-                {items.map(item => (
-                    <li key={item.id} style={{ marginBottom: 6 }}>
-                        {item.text}{' '}
-                        <button onClick={() => handleRemove(item.id)}>Remover</button>
-                    </li>
-                ))}
+            <ul className="exuberant-list">
+                {items.length === 0 ? (
+                    <li className="exuberant-empty">Nenhum item ainda</li>
+                ) : (
+                    items.map(item => (
+                        <li key={item.id} className="exuberant-list-item">
+                            <span className="item-text">{item.text}</span>
+                            <button 
+                                className="exuberant-button exuberant-button-small" 
+                                onClick={() => handleRemove(item.id)}
+                            >
+                                Remover
+                            </button>
+                        </li>
+                    ))
+                )}
             </ul>
 
             <p>
-                <Link to="/">Voltar para Início</Link>
+                <Link to="/" className="exuberant-link">Voltar para Início</Link>
             </p>
-        </>
+        </div>
     )
 }
 

@@ -5,26 +5,30 @@ import './App.css'
 
 function About() {
     return (
-        <>
-            <h1>Sobre</h1>
-            <h1>Essas mulheres e homens gostosos</h1>
-            <img
-                src={hotgirls}
-                alt="Hot Girls"
-                style={{ maxWidth: '50%', height: 'auto' }}
-            />
-            <p>Rosa Luxemburgo, Angela Davis, Louise Michel, Teresa Claramunt</p>
+        <div className="exuberant-div">
+            <h1 className="exuberant-title">Sobre</h1>
+            <h2 className="exuberant-subtitle">Essas mulheres e homens gostosos</h2>
+            <div className="exuberant-image-container">
+                <img
+                    src={hotgirls}
+                    alt="Hot Girls"
+                    className="exuberant-image"
+                />
+            </div>
+            <p className="exuberant-caption">Rosa Luxemburgo, Angela Davis, Louise Michel, Teresa Claramunt</p>
 
-            <img
-                src={hotguys}
-                alt="Hot Guys"
-                style={{ maxWidth: '50%', height: 'auto' }}
-            />
-            <p>Mikhail Alexandrovich Bakunin, Karl Marx, Malcon X, Thomás Sankara</p>
+            <div className="exuberant-image-container">
+                <img
+                    src={hotguys}
+                    alt="Hot Guys"
+                    className="exuberant-image"
+                />
+            </div>
+            <p className="exuberant-caption">Mikhail Alexandrovich Bakunin, Karl Marx, Malcon X, Thomás Sankara</p>
             <p>
-                <Link to="/">Voltar para Início</Link>
+                <Link to="/" className="exuberant-link">Voltar para Início</Link>
             </p>
-        </>
+        </div>
     )
 }
 

@@ -1,16 +1,17 @@
-export default function Alternador(
-    { estadoBooleano, setEstadoBooleano }
-) {
+export default function Alternador({ estadoBooleano, setEstadoBooleano }) {
     return (
-        <div>
+        <div className="exuberant-toggle-container">
             <input 
-            type="checkbox" 
-            checked={estadoBooleano}
-            onChange={
-                () => setEstadoBooleano(!estadoBooleano)
-            }
+                className="exuberant-checkbox"
+                type="checkbox" 
+                checked={estadoBooleano}
+                onChange={() => setEstadoBooleano(!estadoBooleano)}
+                id="alternador-checkbox"
             />
-            <label>Alternador</label>
+            <label className="exuberant-toggle-label" htmlFor="alternador-checkbox">
+                <span className="toggle-indicator"></span>
+                Alternador
+            </label>
         </div>
     )
 }

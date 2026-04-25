@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import './App.css'
 
 function MysqlPage() {
     const [users, setUsers] = useState([])
@@ -90,51 +91,66 @@ function MysqlPage() {
         }
     }
 
-    if (loading) return <p>Carregando...</p>
-    if (error) return <p style={{ color: 'red' }}>Erro: {error}</p>
+    if (loading) return <p className="loading-message">Carregando...</p>
+    if (error) return <p className="error-message cb-status-error">Erro: {error}</p>
 
     return (
-        <>
-            <h2>Usuários (MySQL)</h2>
+        <div className="exuberant-div">
+            <h2 className="exuberant-title">Usuários (MySQL)</h2>
 
-            <form onSubmit={submitForm} style={{ marginBottom: 16 }}>
+            <form className="exuberant-form" onSubmit={submitForm}>
                 <input
+                    className="exuberant-input"
                     type="text"
                     placeholder="Nome"
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                 />
-                {' '}
                 <input
+                    className="exuberant-input"
                     type="email"
                     placeholder="Email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                 />
-                {' '}
-                <button type="submit" disabled={saving}>
+                <button type="submit" className="exuberant-button" disabled={saving}>
                     {saving ? 'Salvando...' : editingId ? 'Atualizar' : 'Criar'}
                 </button>
-                {' '}
                 {editingId && (
-                    <button type="button" onClick={resetForm}>
+                    <button type="button" className="exuberant-button exuberant-button-cancel" onClick={resetForm}>
                         Cancelar
                     </button>
                 )}
             </form>
 
-            <ul>
-                {users.map((u) => (
-                    <li key={u.id}>
-                        {u.name} — {u.email}
-                        {' '}
-                        <button type="button" onClick={() => startEdit(u)}>Editar</button>
-                        {' '}
-                        <button type="button" onClick={() => removeUser(u.id)}>Excluir</button>
-                    </li>
-                ))}
-            </ul>
-        </>
+            {users.length === 0 ? (
+                <p className="exuberant-empty">Nenhum usuário cadastrado</p>
+            ) : (
+                <table className="exuberant-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.map((u) => (
+                            <tr key={u.id}>
+                                <td>{u.id}</td>
+                                <td>{u.name}</td>
+                                <td>{u.email}</td>
+                                <td>
+                                    <button type="button" className="exuberant-button exuberant-button-small" onClick={() => startEdit(u)}>Editar</button>
+                                    <button type="button" className="exuberant-button exuberant-button-small exuberant-button-danger" onClick={() => removeUser(u.id)}>Excluir</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
+        </div>
     )
 }
 

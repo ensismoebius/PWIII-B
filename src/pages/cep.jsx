@@ -1,53 +1,67 @@
 import { useState } from 'react';
+import './App.css'
 
 export default function Cep() {
   const [valorDoCep, setValorDoCep] = useState('');
   const [carregando, setCarregando] = useState(false);
   const [dados, setDados] = useState(null);
+  const [erro, setErro] = useState('');
 
   async function carregarDadosDoCEP() {
     if (valorDoCep.length !== 8) {
-      setValorDoCep('CEP inválido');
+      setErro('CEP inválido');
+      setDados(null);
       return;
     }
 
     setCarregando(true);
+    setErro('');
 
-    await fetch(`https://viacep.com.br/ws/${valorDoCep}/json/`)
-      .then(resposta => resposta.json())
-      .then(dadoEmJson => {
-        if (dadoEmJson.erro) {
-          setValorDoCep('CEP não existe');
-          setCarregando(false);
-        } else {
-          setDados(dadoEmJson);
-          setCarregando(false);
-        }
-      });
+    try {
+      const resposta = await fetch(`https://viacep.com.br/ws/${valorDoCep}/json/`);
+      const dadoEmJson = await resposta.json();
+      
+      if (dadoEmJson.erro) {
+        setErro('CEP não existe');
+        setDados(null);
+      } else {
+        setDados(dadoEmJson);
+        setErro('');
+      }
+    } catch (err) {
+      setErro('Erro ao buscar CEP');
+      setDados(null);
+    } finally {
+      setCarregando(false);
+    }
   }
 
   return (
-    <div>
-      <p>Digite o CEP</p>
+    <div className="exuberant-div">
+      <p className="exuberant-text">Digite o CEP</p>
       <input
+        className="exuberant-input"
         value={valorDoCep}
         onChange={e => setValorDoCep(e.target.value)}
         inputMode="numeric"
         maxLength={8}
+        placeholder="00000000"
       />
 
-      {carregando && <p>Carregando...</p>}
+      {carregando && <p className="loading-message">Carregando...</p>}
+      
+      {erro && <p className="error-message cb-status-error">{erro}</p>}
 
       {dados && (
-        <div>
-          <p>📍 Endereço: {dados.logradouro}</p>
-          <p>🏙 Bairro: {dados.bairro}</p>
-          <p>🌆 Cidade: {dados.localidade}</p>
-          <p>🗺 Estado: {dados.uf}</p>
+        <div className="exuberant-result">
+          <p className="cb-indicator">📍 Endereço: {dados.logradouro}</p>
+          <p className="cb-indicator">🏙 Bairro: {dados.bairro}</p>
+          <p className="cb-indicator">🌆 Cidade: {dados.localidade}</p>
+          <p className="cb-indicator">🗺 Estado: {dados.uf}</p>
         </div>
       )}
 
-      <button onClick={carregarDadosDoCEP}>Consultar</button>
+      <button className="exuberant-button" onClick={carregarDadosDoCEP}>Consultar</button>
     </div>
   );
 }
