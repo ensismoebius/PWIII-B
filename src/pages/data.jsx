@@ -24,11 +24,11 @@ function DataPage() {
         <div className="exuberant-div">
             <h1 className="exuberant-title">Dados (localStorage)</h1>
             <form className="exuberant-form" onSubmit={handleAdd}>
-                <input 
-                    className="exuberant-input" 
-                    value={text} 
-                    onChange={e => setText(e.target.value)} 
-                    placeholder="Novo item" 
+                <input
+                    className="exuberant-input"
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    placeholder="Novo item"
                 />
                 <button type="submit" className="exuberant-button">Adicionar</button>
             </form>
@@ -40,8 +40,8 @@ function DataPage() {
                     items.map(item => (
                         <li key={item.id} className="exuberant-list-item">
                             <span className="item-text">{item.text}</span>
-                            <button 
-                                className="exuberant-button exuberant-button-small" 
+                            <button
+                                className="exuberant-button exuberant-button-small"
                                 onClick={() => handleRemove(item.id)}
                             >
                                 Remover
