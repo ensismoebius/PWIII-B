@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { saveItems, loadItems, addItem } from "../lib/db"
+import { updateItem, saveItems, loadItems, addItem } from "../lib/db"
 
 export default function Data() {
 
@@ -8,6 +8,26 @@ export default function Data() {
 
     // Esse estado é para armazenar o texto digitado pelo usuário, perceba a inicialização como uma string vazia.
     const [texto, setTexto] = useState("")
+
+    // Esse estado é usado para informar que o app/site está no modo edição
+    const [editando, setEditando] = useState(false);
+
+    // Esse estado guarda o id do objeto que está sendo editado
+    const [idEditado, setIdEditado] = useState(0);
+
+    function atualizarValor(){
+        if(!editando){
+            return;
+        }
+        const atualizacoes = {text: texto};
+
+        setListaDeDados(
+            updateItem(
+                idEditado, 
+                atualizacoes
+            )
+        );
+    }
 
     function addItemFront(evento) {
         // Previne o comportamento padrão do formulário, que é recarregar a página.
@@ -23,6 +43,13 @@ export default function Data() {
         setTexto("")
     }
 
+    function ativarEdicao(id, valorOriginal){
+        setEditando(true);
+        setIdEditado(id);
+        setTexto(valorOriginal);
+    }
+
+
     return (
         <div>
             <h1>Dados</h1>
@@ -35,8 +62,17 @@ export default function Data() {
             />
             <input
                 type="button"
-                value="Adicionar"
-                onClick={addItemFront}
+                value={editando ? "Atualizar" : "Adicionar"}
+                onClick={() => {
+                    if(editando){
+                        // Próxima aula: Ver porque não está adicionando
+                        console.log("editando");
+                        atualizarValor();
+                    }else{
+                        console.log("adicionando");
+                        addItemFront();
+                    }
+                }}
             />
 
             <p>Aqui estão os dados</p>
@@ -45,26 +81,35 @@ export default function Data() {
                     <tr>
                         <th>indice</th>
                         <th>valor</th>
+                        <th>Operações</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         listaDeDados.length === 0 ? (
                             <tr>
-                                <td colSpan="2">Nenhum dado encontrado</td>
+                                <td colSpan="3">Nenhum dado encontrado</td>
                             </tr>
                         ) : (
                             listaDeDados.map(
                                 (dado, indice) => (
-                                    <tr key={indice}>
-                                        <td>{indice}</td>
-                                        <td>{dado}</td>
-                                    </tr>
                                     // Para a próxima aula
-                                    // <tr key={dado.id}>
-                                    //     <td>{dado.id}</td>
-                                    //     <td>{dado.text}</td>
-                                    // </tr>
+                                    <tr key={dado.id}>
+                                        <td>{dado.id}</td>
+                                        <td>{dado.text}</td>
+                                        <td>
+                                        <button
+                                        onClick={
+                                            () => {
+                                                ativarEdicao(
+                                                    dado.id,
+                                                    dado.text
+                                                )
+                                            }
+                                        }
+                                        >✏️</button>
+                                        </td>
+                                    </tr>
                                 )
                             )
                         )

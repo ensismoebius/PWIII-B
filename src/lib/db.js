@@ -39,3 +39,24 @@ export function addItem(single_item) {
     // Salva a lista atualizada de itens no localStorage usando a função saveItems.
     saveItems(updatedItems);
 }
+
+export function updateItem(id, update){
+    // Carrega todos os itens cadastrados e aplica sobre os mesmos uma função 
+    // (no formato lambda) que atualiza apenas os objetos com o id igual ao 
+    // fornecido
+    const items = loadItems().map(
+        // i é a variável que guarda cada um dos elementos da lista, por exemplo:
+        // Se loadItems() retornar [1, 5, 20] então i assumirá cada um desses valores
+        i => {
+            if(i.id === id){
+                return {...i, ...update}
+            }
+            return i;
+        }
+    );
+
+    // Persiste a lista com o item atualizado
+    saveItems(items);
+
+    return items;
+}
