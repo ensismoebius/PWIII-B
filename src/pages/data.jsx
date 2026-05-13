@@ -8,7 +8,7 @@ function DataPage() {
 
     function handleAdd(e) {
         e.preventDefault()
-        const value = text.trim()
+        cwonst value = text.trim()
         if (!value) return
         const item = addItem({ text: value })
         setItems(prev => [item, ...prev])
